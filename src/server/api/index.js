@@ -4,11 +4,11 @@ import applications from './applications';
 import { version } from '../../../package.json';
 import Application from '../models/application';
 
-export default ({ config, db }) => {
+export default ({ config, conn }) => {
   const api = Router();
 
   // mount the application resource
-  const model = new Application(db);
+  const model = new Application(conn);
   api.use('/applications', applicationsValidator, applications({ config, model }));
 
   // perhaps expose some API metadata at the root

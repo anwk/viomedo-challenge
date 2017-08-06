@@ -1,5 +1,11 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"database": {
+		"host": "localhost",
+		"user": "root",
+		"password": "mysql",
+		"database": "viomedo"
+	}
 }

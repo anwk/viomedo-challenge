@@ -23,7 +23,7 @@ export default ({ model }) => resource({
   },
 
   /** POST / - Create a new entity */
-  create(req, res) {
+  create(req, res, callback) {
     const { body, protocol } = req;
     const host = req.get('host');
     model.create(body)
@@ -33,21 +33,15 @@ export default ({ model }) => resource({
           self: `${protocol}://${host}/api/applications/${entity.id}`,
         });
         return res.json(entity);
-      }).catch((error) => {
-        res.status(500);
-        return res.json({ errors: [error.sqlMessage] });
-      });
+      }).catch(callback);
   },
 
   /** PUT /:id - Update a given entity */
-  update({ body }, res) {
+  update({ body }, res, callback) {
     model.update(body)
       .then((entity) => {
         return res.json(entity);
-      }).catch((error) => {
-        res.status(500);
-        return res.json({ errors: [error.sqlMessage] });
-      });
+      }).catch(callback);
   },
 
   /** DELETE /:id - Delete a given entity */

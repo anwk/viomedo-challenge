@@ -1,12 +1,10 @@
-/* global describe, it, expect */
+/* global describe, it, expect, beforeAll */
 import request from 'supertest';
 import initialize from '../app';
 import { errorMessages } from './applications-validator';
 
 jest.mock('../../../package.json', () => ({ version: '1.0.0' }));
 jest.mock('../models/application');
-
-const app = initialize({});
 
 const applicationMock = {
   gender: 'male',
@@ -20,6 +18,12 @@ const applicationMock = {
 };
 
 describe('API', () => {
+  let app = null;
+
+  beforeAll(() => {
+    app = initialize({ config: { corsHeaders: ['Link'] } });
+  });
+
   it('It should return version of api', () => {
     return request(app).get('/api/').then((response) => {
       expect(response.statusCode).toBe(200);

@@ -3,13 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import expressValidator from 'express-validator';
-import middleware from './middleware/index';
+import middleware from './middleware';
 import api from './api/index';
-import { isGender, isPhone } from './api/applications-validator';
-import config from './config.json';
 
-const initialize = (db) => {
+const initialize = ({ conn, config }) => {
   const app = express();
   app.server = http.createServer(app);
 
@@ -21,22 +18,23 @@ const initialize = (db) => {
     exposedHeaders: config.corsHeaders,
   }));
 
-  // Validator
-  app.use(expressValidator({
-    customValidators: {
-      isGender,
-      isPhone,
-    },
-  }));
-
   app.use(bodyParser.json({
     limit: config.bodyLimit,
   }));
 
   // internal middleware
-  app.use(middleware({ config, db }));
+  app.use(middleware({ config, conn }));
   // api router
-  app.use('/api', api({ config, db }));
+  app.use('/api', api({ config, conn }));
+
+  // Error handler middleware
+  app.use((err, req, res, next) => {
+    if (err) {
+      res.status(500);
+      return res.json({ errors: err });
+    }
+    return next();
+  });
 
   return app;
 };
