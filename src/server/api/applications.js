@@ -33,7 +33,7 @@ export default ({ model }) => resource({
           self: `${protocol}://${host}/api/applications/${entity.id}`,
         });
         return res.json(entity);
-      }).catch(callback);
+      }).catch(err => callback([err.sqlMessage]));
   },
 
   /** PUT /:id - Update a given entity */
@@ -41,7 +41,7 @@ export default ({ model }) => resource({
     model.update(body)
       .then((entity) => {
         return res.json(entity);
-      }).catch(callback);
+      }).catch(err => callback([err.sqlMessage]));
   },
 
   /** DELETE /:id - Delete a given entity */

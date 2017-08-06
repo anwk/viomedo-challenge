@@ -28,10 +28,10 @@ const initialize = ({ conn, config }) => {
   app.use('/api', api({ config, conn }));
 
   // Error handler middleware
-  app.use((err, req, res, next) => {
-    if (err) {
+  app.use((errors, req, res, next) => {
+    if (errors) {
       res.status(500);
-      return res.json({ errors: err });
+      return res.json({ errors });
     }
     return next();
   });
