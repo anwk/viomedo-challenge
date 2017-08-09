@@ -17,7 +17,6 @@ POST /api/applications/:id - create application
 PUT /api/applications/:id - update application
  
 DELETE /api/applications/:id - delete application
- 
 
 ## Get Started
 **Clone:**
