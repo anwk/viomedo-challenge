@@ -9,10 +9,15 @@ Application uses mysql. You need to have installed mysql.
 #### Application Resources
 
 GET /api/applications - return list of all applications
-GET photos/:id - return application by given id
-PUT photos/:id - update application 
-DELETE photos/:id - delete application
-POST photos/:id - create application 
+
+GET /api/applications/:id - return application by given id
+
+POST /api/applications/:id - create application
+
+PUT /api/applications/:id - update application
+ 
+DELETE /api/applications/:id - delete application
+ 
 
 ## Get Started
 **Clone:**
