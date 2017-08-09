@@ -10,5 +10,5 @@ db.then((conn) => {
   });
 }).catch((error) => {
   const { database, host } = config.database;
-  winston.error(`Can not connect to ${database} database on host ${host}... ${error}`);
+    winston.error(`Can not connect to ${database} database on host ${host}... ${error}`);
 });

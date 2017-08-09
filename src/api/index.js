@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import applicationsValidator from './applications-validator';
 import applications from './applications';
-import { version } from '../../../package.json';
+import { version } from '../../package.json';
 import Application from '../models/application';
 
 export default ({ config, conn }) => {

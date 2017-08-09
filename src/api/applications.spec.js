@@ -3,7 +3,7 @@ import request from 'supertest';
 import initialize from '../app';
 import { errorMessages } from './applications-validator';
 
-jest.mock('../../../package.json', () => ({ version: '1.0.0' }));
+jest.mock('../../package.json', () => ({ version: '1.0.0' }));
 jest.mock('../models/application');
 
 const applicationMock = {
